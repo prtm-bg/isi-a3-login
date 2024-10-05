@@ -21,7 +21,7 @@ function Login() {
     try {
       const response = await axios.get(`http://152.67.176.72:8081/userauth?username=${username}&password=${password}`);
 
-      if (response.data == true) {
+      if (response.data["auth"] == true) {
         // Redirect to dashboard on successful login
         navigate('/dashboard');
       } else {
