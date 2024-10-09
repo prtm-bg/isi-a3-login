@@ -10,7 +10,7 @@ const Logout = () => {
     Cookies.remove('logged');
     Cookies.remove('username');
     // Redirect to login page
-    navigate('/');
+    navigate('/login');
   }, [navigate]);
 
   return <div>Logging out...</div>;
