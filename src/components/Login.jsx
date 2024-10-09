@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 function Login() {
   const [username, setUsername] = useState('');
@@ -23,6 +24,8 @@ function Login() {
 
       if (response.data["auth"] == true) {
         // Redirect to dashboard on successful login
+        Cookies.set('logged', 'true', { expires: 1 });
+        Cookies.set('username', String(username), { expires: 1 });
         navigate('/dashboard');
       } else {
         // Show error message if credentials are incorrect
