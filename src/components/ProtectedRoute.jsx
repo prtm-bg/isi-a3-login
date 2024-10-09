@@ -6,7 +6,7 @@ const ProtectedRoute = ({ children }) => {
   const isAuthenticated = Cookies.get('logged');  // Check if the cookie exists
 
   if (!isAuthenticated) {
-    return <Navigate to="/" />;  // If not authenticated, redirect to login
+    return <Navigate to="/login" />;  // If not authenticated, redirect to login
   }
 
   return children;  // If authenticated, allow access to the protected route
