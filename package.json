@@ -10,14 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
     "@heroicons/react": "^2.1.5",
     "@material-tailwind/react": "^2.1.10",
+    "@material-ui/lab": "^4.0.0-alpha.61",
+    "@mui/material": "^6.1.5",
+    "@nectary/components": "^4.2.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
+    "components": "^0.1.0",
     "js-cookie": "^3.0.5",
+    "lucide-react": "^0.453.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",
     "react-dom": "^18.3.1",
+    "react-modal": "^3.16.1",
     "react-router-bootstrap": "^0.26.3",
     "react-router-dom": "^6.26.2",
     "yarn": "^1.22.22"
