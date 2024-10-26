@@ -9,6 +9,7 @@ const Logout = () => {
     // Remove the auth token cookie
     Cookies.remove('logged');
     Cookies.remove('username');
+    Cookies.remove('access_token');
     // Redirect to login page
     navigate('/login');
   }, [navigate]);
