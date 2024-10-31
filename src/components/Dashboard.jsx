@@ -201,7 +201,7 @@ const ProfileContent = () => {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-4xl font-bold mb-8">Profile</h1>
+      <h1 className="text-4xl font-bold mb-8 text-center">Profile</h1>
       
       {profile ? (
         <div className="bg-gray-800 rounded-lg p-8 shadow-lg">
