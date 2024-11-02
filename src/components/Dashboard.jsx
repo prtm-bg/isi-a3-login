@@ -1,15 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
 import { Home, User, Shield, HelpCircle, LogOut } from 'lucide-react';
 import UserTable from './UserTable';
 
-// Navbar Component with improved styling
 const Navbar = () => {
   const username = Cookies.get('username');
+  const navigate = useNavigate();
   
   const handleLogout = () => {
-    window.location.href = '/logout';
+    // Remove cookies and redirect
+    Cookies.remove('logged');
+    Cookies.remove('username');
+    Cookies.remove('access_token');
+    navigate('/login');
   };
 
   return (
@@ -101,8 +106,6 @@ const ProfileContent = () => {
   useEffect(() => {
     fetchProfile();
   }, []);
-
-  // ... (keeping the existing profile methods)
   
   const fetchProfile = async () => {
     try {
@@ -212,9 +215,9 @@ const ProfileContent = () => {
               </div>
             </div>
 
-            <div className="w-full space-y-4">
+            <div className="w-full flex justify-center space-y-4">
               {isEditing ? (
-                <div className="space-y-4">
+                <div className="space-y-4 w-full">
                   <input
                     type="file"
                     accept="image/*"
@@ -245,12 +248,14 @@ const ProfileContent = () => {
                   </div>
                 </div>
               ) : (
-                <button
-                  onClick={() => setIsEditing(true)}
-                  className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-                >
-                  Change Profile Picture
-                </button>
+                <div className="flex justify-center w-full">
+                  <button
+                    onClick={() => setIsEditing(true)}
+                    className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+                  >
+                    Change Profile Picture
+                  </button>
+                </div>
               )}
 
               {updateSuccess && (

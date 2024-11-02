@@ -6,10 +6,10 @@ import Modal from 'react-modal';
 const UserTable = () => {
   const [users, setUsers] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [newUser, setNewUser] = useState({ 
-    username: '', 
-    email: '', 
-    password: '', 
+  const [newUser, setNewUser] = useState({
+    username: '',
+    email: '',
+    password: '',
     confirmPassword: '',
     image: null,
     image_base64: ''
@@ -54,17 +54,17 @@ const UserTable = () => {
 
   const openModal = (user, action) => {
     setActionType(action);
-    setNewUser(user ? { 
-      username: user.username, 
-      email: user.email, 
-      password: '', 
+    setNewUser(user ? {
+      username: user.username,
+      email: user.email,
+      password: '',
       confirmPassword: '',
       image: null,
       image_base64: user.image_base64 || ''
-    } : { 
-      username: '', 
-      email: '', 
-      password: '', 
+    } : {
+      username: '',
+      email: '',
+      password: '',
       confirmPassword: '',
       image: null,
       image_base64: ''
@@ -81,7 +81,7 @@ const UserTable = () => {
   const handleAddUser = async (e) => {
     e.preventDefault();
     const token = Cookies.get('access_token');
-    
+
     if (newUser.password !== newUser.confirmPassword) {
       alert('Passwords do not match.');
       return;
@@ -110,6 +110,12 @@ const UserTable = () => {
   const handleUpdateUser = async (e) => {
     e.preventDefault();
     const token = Cookies.get('access_token');
+    // Add email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(newUser.email)) {
+      alert('Please enter a valid email address');
+      return;
+    }
     try {
       await axios.post('http://152.67.176.72:8081/update', {
         username: newUser.username,
@@ -184,7 +190,8 @@ const UserTable = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.75)'
+          backgroundColor: 'rgba(0, 0, 0, 0.75)',
+          zIndex: 1000  // Add this line
         },
         content: {
           position: 'absolute',
@@ -199,7 +206,8 @@ const UserTable = () => {
           borderRadius: '20px',
           outline: 'none',
           paddingBlock: '4em',
-          paddingInline: '4em'
+          paddingInline: '4em',
+          zIndex: 1001  // Add this line
         }
       }} isOpen={modalIsOpen} onRequestClose={closeModal}>
         <h2 className="text-2xl mb-4">
@@ -271,8 +279,8 @@ const UserTable = () => {
           </div>
 
           {actionType !== 'view' && (
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 transition-colors"
               disabled={!!imageError}
             >
@@ -280,8 +288,8 @@ const UserTable = () => {
             </button>
           )}
         </form>
-        <button 
-          onClick={closeModal} 
+        <button
+          onClick={closeModal}
           className="mt-4 text-red-500 hover:text-red-600 transition-colors"
         >
           Close

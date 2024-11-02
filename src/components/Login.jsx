@@ -36,7 +36,7 @@ function Login() {
       const response = await axios.post(
         `http://152.67.176.72:8081/token`,
         { username: username.trim(), password: password },
-        { 
+        {
           headers: { "Content-Type": 'application/x-www-form-urlencoded' },
           timeout: 10000 // 10 second timeout
         }
@@ -44,14 +44,14 @@ function Login() {
 
       if (response.status === 200 && response.data.token_type === "bearer") {
         // Set cookies
-        const cookieOptions = { 
+        const cookieOptions = {
           expires: 1,
         };
-        
+
         Cookies.set('access_token', response.data.access_token, cookieOptions);
         Cookies.set('username', username.trim(), cookieOptions);
         Cookies.set('logged', 'true', cookieOptions);
-        
+
         navigate('/');
       } else {
         setError('Invalid username or password');
@@ -59,7 +59,7 @@ function Login() {
     } catch (err) {
       console.error(err);
       setError(
-        err.response?.status === 401 
+        err.response?.status === 401
           ? 'Invalid username or password'
           : 'Unable to connect to the server. Please try again.'
       );
@@ -162,6 +162,20 @@ function Login() {
             )}
           </button>
         </form>
+        <div className="text-center mt-4">
+          <p className="text-gray-400">
+            Don't have an account?{' '}
+            <a
+              className="text-blue-400 hover:text-blue-300 transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate('/register');
+              }}
+            >
+              Register here
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
